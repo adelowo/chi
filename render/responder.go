@@ -92,9 +92,8 @@ func HTML(w http.ResponseWriter, r *http.Request, v string) {
 // Content-Type as application/json.
 func JSON(w http.ResponseWriter, r *http.Request, v interface{}) {
 	buf := &bytes.Buffer{}
-	enc := json.NewEncoder(buf)
-	enc.SetEscapeHTML(true)
-	if err := enc.Encode(v); err != nil {
+
+	if err := json.NewEncoder(buf).Encode(v); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
